@@ -12,6 +12,7 @@
   <title>Autoradio Poznań</title>
 </head>
 <body ng-app="mainApp">
+  <!--navbar-->
   <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
       <!-- Brand and toggle get grouped for better mobile display -->
@@ -28,7 +29,9 @@
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
   </nav>
+  <!--container-->
   <div class="container">
+    <!--header-->
     <header class="jumbotron">
       <div class="name">
         <h1 class="title">AUTORADIO</h1>
@@ -45,6 +48,7 @@
         </p>
       </div>
     </header>
+    <!--main section-->
     <section id="content">
       <h1>O nas</h1>
       <div class="row">
@@ -59,6 +63,7 @@
       </div>
     </section>
   </div>
+  <!--footer-->
   <footer>
     <div class="container">
       <div class="row">
@@ -76,11 +81,14 @@
           <p>poniedziałek - piątek: 10-18<br>sobota: 10-14<br>Parking przy sklepie</p>
         </div>
       </div>
+      <div class="input-group">
+        <h1>Napisz do nas</h1>
+        <input type="text" class="form-control form-control-no-border" placeholder="Twój adres email">
+        <textarea class="form-control form-control-no-border" rows="5" placeholder="Twoja wiadomość"></textarea>
+        <button type="button" class="btn btn-default">WYŚLIJ</button>
+      </div>
     </div>
   </footer>
-
-
-
   <script src="./app/angular.js"></script>    
   <script src="./app/angular-ui-router.js"></script>
   <script src="./app/gmailApp.js"></script>
