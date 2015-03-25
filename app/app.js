@@ -2,7 +2,7 @@
 angular.module('mainModule', ['ui.router'])
 
 	.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
-		$urlRouterProvider.otherwise("/about");
+		/*$urlRouterProvider.otherwise("/about");*/
 
 		$stateProvider
 			.state('about', {
@@ -25,6 +25,20 @@ angular.module('mainModule', ['ui.router'])
 				url: '/inne',
 				templateUrl: 'app/views/inne.html'
 			});
+	}])
+
+	.controller('mainController', ['$scope', '$http', function($scope, $http) {
+		$scope.picsNum = 0;
+
+		var responsePromise = $http.get("app/numberoffiles.php");
+
+		responsePromise.success(function(data, headers) {
+			$scope.picsNum = data;
+			console.log('picsNum: ' + $scope.picsNum);
+		});
+		responsePromise.error(function() {
+			console.log('http get request Failed!');
+		})
 	}])
 
 	.directive('navbar', function(){
@@ -59,5 +73,4 @@ angular.module('mainModule', ['ui.router'])
 			}
 		};
 	});
-
 })();
