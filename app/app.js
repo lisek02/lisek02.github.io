@@ -2,7 +2,7 @@
 angular.module('mainModule', ['ui.router'])
 
 	.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
-		/*$urlRouterProvider.otherwise("/about");*/
+		$urlRouterProvider.otherwise("/about");
 
 		$stateProvider
 			.state('about', {
@@ -27,18 +27,14 @@ angular.module('mainModule', ['ui.router'])
 			});
 	}])
 
-	.controller('mainController', ['$scope', '$http', function($scope, $http) {
-		$scope.picsNum = 0;
+	.controller('mainController', ['$scope', 'galleryFactory', function($scope, galleryFactory) {
+		this.images = [];
 
-		var responsePromise = $http.get("app/numberoffiles.php");
-
-		responsePromise.success(function(data, headers) {
-			$scope.picsNum = data;
-			console.log('picsNum: ' + $scope.picsNum);
-		});
-		responsePromise.error(function() {
-			console.log('http get request Failed!');
-		})
+		galleryFactory.getImages("nawigacja")
+			.then(angular.bind(this, function then() {
+				this.images = galleryFactory.images;
+				console.log(this.images);
+			} ));
 	}])
 
 	.directive('navbar', function(){
@@ -72,5 +68,25 @@ angular.module('mainModule', ['ui.router'])
 				
 			}
 		};
-	});
+	})
+
+	.factory('galleryFactory', ['$http', function($http){
+		var exports = {};
+		exports.images = [];
+
+		exports.getImages = function(galleryName) {
+			return $http.get('app/'+galleryName+'Imgs.json')
+			.success(function(data) {
+				exports.images = data;
+				console.log('app/'+galleryName+'Imgs.json');
+				//console.log("Received data: ", data);
+			})
+			.error(function(data) {
+				console.log("There was an erro with loading json file");
+			});
+		};
+
+		return exports;
+	}]);
+
 })();

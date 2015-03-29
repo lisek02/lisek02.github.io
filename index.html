@@ -12,10 +12,10 @@
 </head>
 <body ng-app="mainModule">
   <navbar></navbar>
-  <div class="container" ng-controller="mainController">
+  <div class="container">
     <header class="jumbotron"></header>
     <section id="content">
-      <div ui-view autoscroll="false"></div>
+      <div ui-view autoscroll="false" ng-controller="mainController as mainCtrl"></div>
     </section>
   </div>
   <footer id="contact"></footer>
